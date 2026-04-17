@@ -119,6 +119,9 @@ p{font-size:14px;color:var(--ts);line-height:1.6}
 .ch-chip.jeopardy{border-color:var(--bds);color:var(--ts);background:var(--bg);font-style:italic}
 .ch-chip.jeopardy:hover{background:var(--bgd);color:var(--tp)}
 .ch-chip.jeopardy.on{background:var(--guess-bg);border-color:var(--guess-b);color:var(--guess);font-weight:500;font-style:italic}
+.ch-chip.ai-gen{border-color:var(--bds);color:var(--ts);background:var(--bg);font-style:italic}
+.ch-chip.ai-gen:hover{background:var(--bgd);color:var(--tp)}
+.ch-chip.ai-gen.on{background:var(--tutor-bg);border-color:var(--tutor-b);color:var(--tutor);font-weight:500;font-style:italic}
 .class-section-header{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1rem;gap:10px;flex-wrap:wrap;cursor:pointer;user-select:none;transition:background .12s}
 .class-section-header:hover{background:var(--bgs)}
 .class-section-header.open{border-bottom:.5px solid var(--bd)}
@@ -861,7 +864,7 @@ const buildUnitChapters=()=>{
   const sorted={};
   ['Unit 1','Unit 2','Unit 3','Unit 4'].forEach(u=>{
     if(map[u])sorted[u]=[...map[u]].sort((a,b)=>{
-      const n=s=>s==='Jeopardy Review'?9999:parseInt(s.match(/\d+/)?.[0]||'0');
+      const n=s=>s==='Jeopardy Review'?9998:s==='AI Generated'?9999:parseInt(s.match(/\d+/)?.[0]||'0');
       return n(a)-n(b);
     });
   });
@@ -922,8 +925,10 @@ function buildClassSection(cls){
       const chAllSel=selChapterKeys.has(chapKey);
       const chSomeSel=!chAllSel&&chTopics.some(t=>selTopics.has(t)&&selChapterKeys.has(chapKey));
       const isJeopardy=ch==='Jeopardy Review';
-      const baseClass=isJeopardy?' jeopardy':'';
-      qfHtml+=`<button class="ch-chip${baseClass}${chAllSel?' on':chSomeSel?' partial':''}" onclick="quickSelectChapter('${esc(unit)}','${esc(ch)}')">${isJeopardy?'🎯 '+ch:ch}</button>`;
+      const isAiGen=ch==='AI Generated';
+      const baseClass=isJeopardy?' jeopardy':isAiGen?' ai-gen':'';
+      const label=isJeopardy?'🎯 '+ch:isAiGen?'🤖 '+ch:ch;
+      qfHtml+=`<button class="ch-chip${baseClass}${chAllSel?' on':chSomeSel?' partial':''}" onclick="quickSelectChapter('${esc(unit)}','${esc(ch)}')">${label}</button>`;
     });
     qfHtml+=`</div></div>`;
   });
