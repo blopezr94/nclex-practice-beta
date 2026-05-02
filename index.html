@@ -24,6 +24,7 @@
   --guess:#6d28d9;--guess-bg:#faf5ff;--guess-b:#c4b5fd;
   --hl:#fef08a;--hl-text:#713f12;
   --tutor:#0f766e;--tutor-bg:#f0fdfa;--tutor-b:#5eead4;--tutor-m:#14b8a6;
+  --final:#b45309;--final-bg:#fffbeb;--final-b:#fcd34d;--final-m:#f59e0b;
   --test:#6d28d9;--test-bg:#faf5ff;--test-b:#c4b5fd;--test-m:#8b5cf6;
   --r8:8px;--r12:12px;--r16:16px;--r20:20px;
   --shadow:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);
@@ -40,8 +41,13 @@
   --guess:#a78bfa;--guess-bg:#2e1065;--guess-b:#6d28d9;
   --hl:#713f12;--hl-text:#fef08a;
   --tutor:#2dd4bf;--tutor-bg:#042f2e;--tutor-b:#0f766e;
+  --final:#fbbf24;--final-bg:#422006;--final-b:#92400e;--final-m:#f59e0b;
   --test:#a78bfa;--test-bg:#2e1065;--test-b:#6d28d9;
 }}
+[data-theme="dark"]{--tp:#f9fafb;--ts:#9ca3af;--tl:#6b7280;--bg:#111827;--bgs:#1f2937;--bgd:#0f172a;--bd:rgba(255,255,255,0.07);--bds:rgba(255,255,255,0.14);--acc:#60a5fa;--acc-l:#1e3a5f;--acc-m:#1e40af;--acc-d:#93c5fd;--ok:#4ade80;--ok-bg:#052e16;--ok-b:#166534;--bad:#f87171;--bad-bg:#450a0a;--bad-b:#991b1b;--warn:#fbbf24;--warn-bg:#422006;--warn-b:#92400e;--guess:#a78bfa;--guess-bg:#2e1065;--guess-b:#6d28d9;--hl:#713f12;--hl-text:#fef08a;--tutor:#2dd4bf;--tutor-bg:#042f2e;--tutor-b:#0f766e;--final:#fbbf24;--final-bg:#422006;--final-b:#92400e;--final-m:#f59e0b;--test:#a78bfa;--test-bg:#2e1065;--test-b:#6d28d9;}
+[data-theme="light"]{--tp:#111827;--ts:#6b7280;--tl:#9ca3af;--bg:#ffffff;--bgs:#f9fafb;--bgd:#f3f4f6;--bd:rgba(0,0,0,0.08);--bds:rgba(0,0,0,0.16);--acc:#1d4ed8;--acc-l:#eff6ff;--acc-m:#bfdbfe;--acc-d:#1e40af;--ok:#166534;--ok-bg:#f0fdf4;--ok-b:#86efac;--bad:#991b1b;--bad-bg:#fef2f2;--bad-b:#fca5a5;--warn:#92400e;--warn-bg:#fffbeb;--warn-b:#fcd34d;--warn-m:#f59e0b;--guess:#6d28d9;--guess-bg:#faf5ff;--guess-b:#c4b5fd;--hl:#fef08a;--hl-text:#713f12;--tutor:#0f766e;--tutor-bg:#f0fdfa;--tutor-b:#5eead4;--tutor-m:#14b8a6;--final:#b45309;--final-bg:#fffbeb;--final-b:#fcd34d;--final-m:#f59e0b;--test:#6d28d9;--test-bg:#faf5ff;--test-b:#c4b5fd;--test-m:#8b5cf6;}
+.theme-toggle{position:fixed;top:12px;right:12px;z-index:1000;background:var(--bgs);border:.5px solid var(--bd);border-radius:var(--r20);padding:6px 10px;cursor:pointer;font-size:16px;line-height:1;box-shadow:var(--shadow);transition:all .15s;color:var(--tp)}
+.theme-toggle:hover{background:var(--bgd);box-shadow:var(--shadow-lg)}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bgd);color:var(--tp);min-height:100vh;line-height:1.55}
 #app{max-width:840px;margin:0 auto;padding:1.5rem 1rem calc(6rem + env(safe-area-inset-bottom)) 1rem}
@@ -122,6 +128,18 @@ p{font-size:14px;color:var(--ts);line-height:1.6}
 .ch-chip.ai-gen{border-color:var(--bds);color:var(--ts);background:var(--bg);font-style:italic}
 .ch-chip.ai-gen:hover{background:var(--bgd);color:var(--tp)}
 .ch-chip.ai-gen.on{background:var(--tutor-bg);border-color:var(--tutor-b);color:var(--tutor);font-weight:500;font-style:italic}
+.final-bp-section{background:var(--final-bg);border:1.5px solid var(--final-b);border-radius:var(--r12);padding:.9rem 1rem;margin-bottom:1rem}
+.final-bp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem}
+.final-bp-title{font-size:13px;font-weight:600;color:var(--final);letter-spacing:.01em}
+.final-bp-actions{display:flex;gap:6px}
+.final-bp-btn{font-size:11px;padding:3px 10px;border-radius:var(--r20);border:.5px solid var(--final-b);cursor:pointer;background:transparent;color:var(--final);font-family:inherit;transition:all .12s}
+.final-bp-btn:hover{background:var(--final-b);color:var(--final)}
+.final-bp-btn.active{background:var(--final-m);border-color:var(--final-m);color:#fff}
+.final-bp-chips{display:flex;flex-wrap:wrap;gap:5px}
+.final-chip{font-size:11px;padding:4px 10px;border-radius:var(--r20);border:.5px solid var(--final-b);cursor:pointer;background:var(--bg);color:var(--final);font-family:inherit;transition:all .12s;white-space:nowrap}
+.final-chip:hover{background:var(--final-bg)}
+.final-chip.on{background:var(--final-m);border-color:var(--final-m);color:#fff;font-weight:600}
+.final-chip .pct{font-size:10px;opacity:.75;margin-left:2px}
 .class-section-header{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1rem;gap:10px;flex-wrap:wrap;cursor:pointer;user-select:none;transition:background .12s}
 .class-section-header:hover{background:var(--bgs)}
 .class-section-header.open{border-bottom:.5px solid var(--bd)}
@@ -485,6 +503,7 @@ p{font-size:14px;color:var(--ts);line-height:1.6}
 </head>
 <body>
 <div id="ecg-overlay" onclick="closeEcgZoom()"><span id="ecg-overlay-close" onclick="closeEcgZoom()">✕</span><img id="ecg-overlay-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="ECG strip"></div>
+<button class="theme-toggle" id="theme-toggle-btn" onclick="cycleTheme()" title="Toggle dark/light mode">🌙</button>
 <div id="app" style="max-width:840px;margin:0 auto;padding:1.5rem 1rem calc(6rem + env(safe-area-inset-bottom)) 1rem">
 
   <!-- Hidden Netlify form — required for Netlify to detect the form at deploy time -->
@@ -552,6 +571,7 @@ p{font-size:14px;color:var(--ts);line-height:1.6}
           <button class="filt-btn muted" style="font-size:11px;padding:4px 12px" onclick="clearAllTopics()">Clear all</button>
         </div>
       </div>
+      <div id="final-bp-container"></div>
       <div id="class-sections"></div>
     </div>
 
@@ -682,6 +702,7 @@ function toggleFormat(key){
 // ═══════════════════════════════════════════════════════════════
 let selTopics=new Set();
 let selChapterKeys=new Set(); // "unit§chapter" keys for chip coloring only — independent of topic name overlap
+let selFinalCategories=new Set(); // selected Final Blueprint sub-categories
 let collapsedEcg=new Set();     // ECG subsection collapsed state
 let topicsOpen=false;           // topics section collapsed by default
 
@@ -693,7 +714,7 @@ function classSelectionState(cls){const t=topicsForClass(cls),n=t.filter(x=>selT
 // ═══════════════════════════════════════════════════════════════
 const SK='nclex_practice_v13',SK_SET='nclex_settings_v13',SK_HIST='nclex_history_v1',SK_STATUS='nclex_qstatus_v1';
 function saveSettings(){
-  try{localStorage.setItem(SK_SET,JSON.stringify({mode:examMode,mpq:document.getElementById('mins-per-q').value,numQ:document.getElementById('num-q').value,order:document.getElementById('q-order').value,formats:[...selFormats],topics:[...selTopics],chapterKeys:[...selChapterKeys],statuses:[...selStatuses]}));}catch(e){}
+  try{localStorage.setItem(SK_SET,JSON.stringify({mode:examMode,mpq:document.getElementById('mins-per-q').value,numQ:document.getElementById('num-q').value,order:document.getElementById('q-order').value,formats:[...selFormats],topics:[...selTopics],chapterKeys:[...selChapterKeys],statuses:[...selStatuses],finalCats:[...selFinalCategories]}));}catch(e){}
 }
 function loadSettings(){
   try{
@@ -706,6 +727,7 @@ function loadSettings(){
     if(p.formats){const valid=new Set(BANK.map(q=>q.type));selFormats=new Set((p.formats||[]).filter(f=>valid.has(f)));if(selFormats.size===0)selFormats=new Set(valid);}
     if(p.topics){const valid=new Set(BANK.map(q=>q.topic));selTopics=new Set((p.topics||[]).filter(t=>valid.has(t)));}
     if(p.chapterKeys)selChapterKeys=new Set(p.chapterKeys);
+    if(p.finalCats)selFinalCategories=new Set(p.finalCats);
     if(p.statuses)selStatuses=new Set(p.statuses);
   }catch(e){}
 }
@@ -795,7 +817,7 @@ function showBuilder(){
   document.getElementById('start-screen').style.display='block';
   const globalBtns=document.getElementById('global-topic-btns');
   if(globalBtns)globalBtns.style.display='none';
-  applyMode();buildFormatGrid();buildStatusFilter();buildClassSections();updateCount();
+  applyMode();buildFormatGrid();buildStatusFilter();initTheme();buildClassSections();updateCount();
   saveSettings();
 }
 
@@ -875,6 +897,70 @@ const buildUnitChapters=()=>{
 const topicsByUnitChapter=(unit,ch)=>[...new Set(BANK.filter(q=>q.unit===unit&&q.chapter===ch).map(q=>q.topic))];
 const topicsByChapter=ch=>[...new Set(BANK.filter(q=>q.chapter===ch).map(q=>q.topic))];
 
+
+// ═══════════════════════════════════════════════════════════════
+// FINAL BLUEPRINT
+// ═══════════════════════════════════════════════════════════════
+const FINAL_CATEGORIES = [
+  {key:'Trauma',        pct:13.5},
+  {key:'Neuro',         pct:12.8},
+  {key:'Renal',         pct:12.8},
+  {key:'DKA',           pct:12.8},
+  {key:'Respiratory',   pct:10.8},
+  {key:'Cardiac',       pct:10.8},
+  {key:'Shock',         pct:10.8},
+  {key:'Sepsis',        pct:4.1},
+  {key:'Thyroid Storm', pct:4.1},
+  {key:'Organ Donation',pct:4.1},
+  {key:'Dosage Calculation',pct:3.4},
+  {key:'Pain & Sedation',pct:null},
+];
+
+function buildFinalBlueprintSection(){
+  const allOn = FINAL_CATEGORIES.every(c=>selFinalCategories.has(c.key));
+  const noneOn = FINAL_CATEGORIES.every(c=>!selFinalCategories.has(c.key));
+  let html = `<div class="final-bp-section">`;
+  html += `<div class="final-bp-header">`;
+  html += `<span class="final-bp-title">Final Blueprint</span>`;
+  html += `<div class="final-bp-actions">`;
+  html += `<button class="final-bp-btn${allOn?' active':''}" onclick="selectAllFinal()">Select all</button>`;
+  html += `<button class="final-bp-btn${noneOn?' active':''}" onclick="clearAllFinal()">Clear</button>`;
+  html += `</div></div>`;
+  html += `<div class="final-bp-chips">`;
+  FINAL_CATEGORIES.forEach(c=>{
+    const on = selFinalCategories.has(c.key);
+    const count = BANK.filter(q=>q.finalCategory===c.key).length;
+    const pctLabel = c.pct ? `<span class="pct">${c.pct}%</span>` : '';
+    html += `<button class="final-chip${on?' on':''}" onclick="toggleFinalCategory('${c.key}')">${c.key}${pctLabel} <span class="pct">(${count})</span></button>`;
+  });
+  html += `</div></div>`;
+  return html;
+}
+
+function toggleFinalCategory(cat){
+  if(selFinalCategories.has(cat)){
+    selFinalCategories.delete(cat);
+  } else {
+    selFinalCategories.add(cat);
+  }
+  saveSettings();refreshFinalSection();updateCount();
+}
+
+function selectAllFinal(){
+  FINAL_CATEGORIES.forEach(c=>selFinalCategories.add(c.key));
+  saveSettings();refreshFinalSection();updateCount();
+}
+
+function clearAllFinal(){
+  selFinalCategories.clear();
+  saveSettings();refreshFinalSection();updateCount();
+}
+
+function refreshFinalSection(){
+  const el=document.getElementById('final-bp-container');
+  if(el) el.innerHTML=buildFinalBlueprintSection();
+}
+
 function quickSelectChapter(unit,ch){
   const ts=topicsByUnitChapter(unit,ch);
   const chapKey=`${unit}§${ch}`;
@@ -895,6 +981,7 @@ function quickSelectChapter(unit,ch){
 }
 // ═══════════════════════════════════════════════════════════════
 function buildClassSections(){
+  document.getElementById('final-bp-container').innerHTML=buildFinalBlueprintSection();
   document.getElementById('class-sections').innerHTML=buildClassSection('220 Critical Care');
   updateFilterSummary();
 }
@@ -964,9 +1051,15 @@ function refreshClassSection(){buildClassSections();updateFilterSummary();update
 function toggleTopicsOpen(){topicsOpen=!topicsOpen;buildClassSections();}
 function toggleEcgCollapse(cls){collapsedEcg.has(cls)?collapsedEcg.delete(cls):collapsedEcg.add(cls);refreshClassSection();}
 function updateFilterSummary(){
-  const total=selTopics.size,available=getFiltered().length;
+  const available=getFiltered().length;
   const el=document.getElementById('filter-summary');
-  if(el)el.textContent=total>0?`${total} topic${total!==1?'s':''} · ${available} questions`:'';
+  if(el){
+    const parts=[];
+    if(selFinalCategories.size>0) parts.push(`Final: ${[...selFinalCategories].join(', ')}`);
+    if(selTopics.size>0) parts.push(`${selTopics.size} topic${selTopics.size!==1?'s':''}`);
+    if(parts.length>0) parts.push(`${available} questions`);
+    el.textContent=parts.join(' · ');
+  }
   const toolbar=document.getElementById('topic-toolbar');
   if(toolbar)toolbar.style.display='none';
 }
@@ -1019,9 +1112,39 @@ function esc(s){return s.replace(/['"\\]/g,'\\$&');}
 // ═══════════════════════════════════════════════════════════════
 function getFiltered(){
   if(selFormats.size===0)return[];
+  const hasFinal=selFinalCategories.size>0;
+  const hasChapters=selChapterKeys.size>0;
+  const hasTopics=selTopics.size>0;
+
+  // Final Blueprint filter — independent of chapter/topic selection
+  if(hasFinal&&!hasChapters&&!hasTopics){
+    return BANK.filter(q=>{
+      if(!selFormats.has(q.type))return false;
+      if(q.unit==='Unassigned')return false;
+      if(!q.finalCategory||!selFinalCategories.has(q.finalCategory))return false;
+      if(selStatuses.size>0&&!selStatuses.has(getQStatus(q.id)))return false;
+      return true;
+    });
+  }
+
+  // Final Blueprint + chapter/topic combination — merge both filter sets
+  if(hasFinal&&(hasChapters||hasTopics)){
+    return BANK.filter(q=>{
+      if(!selFormats.has(q.type))return false;
+      if(selStatuses.size>0&&!selStatuses.has(getQStatus(q.id)))return false;
+      // Check final category match
+      const inFinal=q.finalCategory&&selFinalCategories.has(q.finalCategory);
+      // Check chapter/topic match
+      const chapKey=`${q.unit}§${q.chapter}`;
+      const inChapter=selChapterKeys.has(chapKey);
+      const inTopic=hasTopics&&selTopics.has(q.topic)&&!hasChapters;
+      return inFinal||inChapter||inTopic;
+    });
+  }
+
   // If chapters have been explicitly selected via chips, filter by chapter+topic
   // This prevents Jeopardy Review topics from pulling in Ch.14 questions with same topic names
-  if(selChapterKeys.size>0){
+  if(hasChapters){
     return BANK.filter(q=>{
       if(!selFormats.has(q.type))return false;
       if(selStatuses.size>0&&!selStatuses.has(getQStatus(q.id)))return false;
@@ -1040,7 +1163,7 @@ function getFiltered(){
     });
   }
   // Fallback: pure topic-name filtering (used when selecting individual topic chips)
-  if(selTopics.size===0)return[];
+  if(!hasTopics)return[];
   return BANK.filter(q=>{
     if(q.unit==='Unassigned')return false; // hidden questions only appear via master select
     if(!selTopics.has(q.topic))return false;
@@ -1052,7 +1175,7 @@ function getFiltered(){
 function updateCount(){
   const f=getFiltered(),req=parseInt(document.getElementById('num-q').value)||35,will=Math.min(req,f.length);
   const el=document.getElementById('q-count-info'),btn=document.getElementById('start-btn');
-  const nothingSelected=selChapterKeys.size===0&&selTopics.size===0;
+  const nothingSelected=selChapterKeys.size===0&&selTopics.size===0&&selFinalCategories.size===0;
   if(nothingSelected){el.textContent='Select topics above to get started.';el.className='q-count-info';btn.disabled=true;}
   else if(f.length===0){el.textContent='No questions match the selected formats — try adjusting the format filter.';el.className='q-count-info empty';btn.disabled=true;}
   else{el.textContent=`${f.length} question${f.length!==1?'s':''} available · Will generate ${will} question${will!==1?'s':''} for this exam`;el.className='q-count-info ready';btn.disabled=false;}
@@ -1760,6 +1883,20 @@ function showModal(title,body,confirmLabel,onConfirm){document.getElementById('m
 function closeModal(){document.getElementById('modal').style.display='none';}
 
 // ── BOOT ──
+// ── theme ──
+const SK_THEME='nclex_theme_v1';
+function applyTheme(t){
+  const r=document.documentElement,btn=document.getElementById('theme-toggle-btn');
+  if(t==='dark'){r.setAttribute('data-theme','dark');if(btn)btn.textContent='☀️';}
+  else if(t==='light'){r.setAttribute('data-theme','light');if(btn)btn.textContent='🌙';}
+  else{r.removeAttribute('data-theme');if(btn)btn.textContent='🔆';}
+}
+function cycleTheme(){
+  const cur=localStorage.getItem(SK_THEME)||'system';
+  const next=cur==='system'?'light':cur==='light'?'dark':'system';
+  localStorage.setItem(SK_THEME,next);applyTheme(next);
+}
+function initTheme(){applyTheme(localStorage.getItem(SK_THEME)||'system');}
 loadBank();
 
 // ECG overlay keyboard + swipe dismiss
