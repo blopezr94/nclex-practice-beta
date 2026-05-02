@@ -46,7 +46,7 @@
 }}
 [data-theme="dark"]{--tp:#f9fafb;--ts:#9ca3af;--tl:#6b7280;--bg:#111827;--bgs:#1f2937;--bgd:#0f172a;--bd:rgba(255,255,255,0.07);--bds:rgba(255,255,255,0.14);--acc:#60a5fa;--acc-l:#1e3a5f;--acc-m:#1e40af;--acc-d:#93c5fd;--ok:#4ade80;--ok-bg:#052e16;--ok-b:#166534;--bad:#f87171;--bad-bg:#450a0a;--bad-b:#991b1b;--warn:#fbbf24;--warn-bg:#422006;--warn-b:#92400e;--guess:#a78bfa;--guess-bg:#2e1065;--guess-b:#6d28d9;--hl:#713f12;--hl-text:#fef08a;--tutor:#2dd4bf;--tutor-bg:#042f2e;--tutor-b:#0f766e;--final:#fbbf24;--final-bg:#422006;--final-b:#92400e;--final-m:#f59e0b;--test:#a78bfa;--test-bg:#2e1065;--test-b:#6d28d9;}
 [data-theme="light"]{--tp:#111827;--ts:#6b7280;--tl:#9ca3af;--bg:#ffffff;--bgs:#f9fafb;--bgd:#f3f4f6;--bd:rgba(0,0,0,0.08);--bds:rgba(0,0,0,0.16);--acc:#1d4ed8;--acc-l:#eff6ff;--acc-m:#bfdbfe;--acc-d:#1e40af;--ok:#166534;--ok-bg:#f0fdf4;--ok-b:#86efac;--bad:#991b1b;--bad-bg:#fef2f2;--bad-b:#fca5a5;--warn:#92400e;--warn-bg:#fffbeb;--warn-b:#fcd34d;--warn-m:#f59e0b;--guess:#6d28d9;--guess-bg:#faf5ff;--guess-b:#c4b5fd;--hl:#fef08a;--hl-text:#713f12;--tutor:#0f766e;--tutor-bg:#f0fdfa;--tutor-b:#5eead4;--tutor-m:#14b8a6;--final:#b45309;--final-bg:#fffbeb;--final-b:#fcd34d;--final-m:#f59e0b;--test:#6d28d9;--test-bg:#faf5ff;--test-b:#c4b5fd;--test-m:#8b5cf6;}
-.theme-toggle{position:fixed;top:12px;right:12px;z-index:1000;background:var(--bgs);border:.5px solid var(--bd);border-radius:var(--r20);padding:6px 10px;cursor:pointer;font-size:16px;line-height:1;box-shadow:var(--shadow);transition:all .15s;color:var(--tp)}
+.theme-toggle{position:fixed;top:64px;right:12px;z-index:1000;background:var(--bgs);border:.5px solid var(--bd);border-radius:var(--r20);padding:6px 10px;cursor:pointer;font-size:16px;line-height:1;box-shadow:var(--shadow);transition:all .15s;color:var(--tp)}
 .theme-toggle:hover{background:var(--bgd);box-shadow:var(--shadow-lg)}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bgd);color:var(--tp);min-height:100vh;line-height:1.55}
@@ -596,10 +596,23 @@ p{font-size:14px;color:var(--ts);line-height:1.6}
   <!-- CALCULATOR -->
   <div id="calc-fab" style="display:none">
     <div class="calc-fab-label">Calculator</div>
-    <button class="calc-fab-btn" onclick="if(typeof toggleCalc==='function')toggleCalc()">🧮</button>
+    <button class="calc-fab-btn" onclick="if(typeof toggleCalc==='function')toggleCalc()" title="Calculator">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="4" y="2" width="16" height="20" rx="2"/>
+    <line x1="8" y1="6" x2="16" y2="6"/>
+    <line x1="8" y1="10" x2="8" y2="10"/>
+    <line x1="12" y1="10" x2="12" y2="10"/>
+    <line x1="16" y1="10" x2="16" y2="10"/>
+    <line x1="8" y1="14" x2="8" y2="14"/>
+    <line x1="12" y1="14" x2="12" y2="14"/>
+    <line x1="16" y1="14" x2="16" y2="14"/>
+    <line x1="8" y1="18" x2="12" y2="18"/>
+    <line x1="16" y1="18" x2="16" y2="18"/>
+  </svg>
+</button>
   </div>
   <div id="calc-panel" class="calc-panel" style="display:none">
-    <div class="calc-header"><div class="calc-header-title">🧮 Calculator</div><button class="calc-close" onclick="if(typeof toggleCalc==='function')toggleCalc()">✕</button></div>
+    <div class="calc-header"><div class="calc-header-title">Calculator</div><button class="calc-close" onclick="if(typeof toggleCalc==='function')toggleCalc()">✕</button></div>
     <div class="calc-display"><div class="calc-expr" id="calc-expr"></div><div class="calc-result" id="calc-result">0</div></div>
     <div class="calc-basic" id="calc-basic-panel">
       <button class="calc-btn clr" onclick="calcClear()">C</button><button class="calc-btn op" onclick="calcOp('backspace')">⌫</button><button class="calc-btn op" onclick="calcOp('%')">%</button><button class="calc-btn op" onclick="calcOp('/')">÷</button>
@@ -1887,13 +1900,24 @@ function closeModal(){document.getElementById('modal').style.display='none';}
 const SK_THEME='nclex_theme_v1';
 function applyTheme(t){
   const r=document.documentElement,btn=document.getElementById('theme-toggle-btn');
+  const sysDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
   if(t==='dark'){r.setAttribute('data-theme','dark');if(btn)btn.textContent='☀️';}
   else if(t==='light'){r.setAttribute('data-theme','light');if(btn)btn.textContent='🌙';}
-  else{r.removeAttribute('data-theme');if(btn)btn.textContent='🔆';}
+  else{
+    // system default — show icon reflecting OPPOSITE of current system (so clicking flips it)
+    r.removeAttribute('data-theme');
+    if(btn)btn.textContent=sysDark?'☀️':'🌙';
+  }
 }
 function cycleTheme(){
   const cur=localStorage.getItem(SK_THEME)||'system';
-  const next=cur==='system'?'light':cur==='light'?'dark':'system';
+  const sysDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
+  // If system, flip to opposite of current system theme
+  // If already manually set, toggle between light and dark
+  let next;
+  if(cur==='system'){next=sysDark?'light':'dark';}
+  else if(cur==='dark'){next='light';}
+  else{next='dark';}
   localStorage.setItem(SK_THEME,next);applyTheme(next);
 }
 function initTheme(){applyTheme(localStorage.getItem(SK_THEME)||'system');}
