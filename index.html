@@ -46,7 +46,56 @@
 }}
 [data-theme="dark"]{--tp:#f9fafb;--ts:#9ca3af;--tl:#6b7280;--bg:#111827;--bgs:#1f2937;--bgd:#0f172a;--bd:rgba(255,255,255,0.07);--bds:rgba(255,255,255,0.14);--acc:#60a5fa;--acc-l:#1e3a5f;--acc-m:#1e40af;--acc-d:#93c5fd;--ok:#4ade80;--ok-bg:#052e16;--ok-b:#166534;--bad:#f87171;--bad-bg:#450a0a;--bad-b:#991b1b;--warn:#fbbf24;--warn-bg:#422006;--warn-b:#92400e;--guess:#a78bfa;--guess-bg:#2e1065;--guess-b:#6d28d9;--hl:#713f12;--hl-text:#fef08a;--tutor:#2dd4bf;--tutor-bg:#042f2e;--tutor-b:#0f766e;--final:#fbbf24;--final-bg:#422006;--final-b:#92400e;--final-m:#f59e0b;--test:#a78bfa;--test-bg:#2e1065;--test-b:#6d28d9;}
 [data-theme="light"]{--tp:#111827;--ts:#6b7280;--tl:#9ca3af;--bg:#ffffff;--bgs:#f9fafb;--bgd:#f3f4f6;--bd:rgba(0,0,0,0.08);--bds:rgba(0,0,0,0.16);--acc:#1d4ed8;--acc-l:#eff6ff;--acc-m:#bfdbfe;--acc-d:#1e40af;--ok:#166534;--ok-bg:#f0fdf4;--ok-b:#86efac;--bad:#991b1b;--bad-bg:#fef2f2;--bad-b:#fca5a5;--warn:#92400e;--warn-bg:#fffbeb;--warn-b:#fcd34d;--warn-m:#f59e0b;--guess:#6d28d9;--guess-bg:#faf5ff;--guess-b:#c4b5fd;--hl:#fef08a;--hl-text:#713f12;--tutor:#0f766e;--tutor-bg:#f0fdfa;--tutor-b:#5eead4;--tutor-m:#14b8a6;--final:#b45309;--final-bg:#fffbeb;--final-b:#fcd34d;--final-m:#f59e0b;--test:#6d28d9;--test-bg:#faf5ff;--test-b:#c4b5fd;--test-m:#8b5cf6;}
-.theme-toggle{position:fixed;top:64px;right:12px;z-index:1000;background:var(--bgs);border:.5px solid var(--bd);border-radius:var(--r20);padding:6px 10px;cursor:pointer;font-size:16px;line-height:1;box-shadow:var(--shadow);transition:all .15s;color:var(--tp)}
+
+/* ── Mock Exams ── */
+.mock-section{background:var(--bgs);border:.5px solid var(--bd);border-radius:var(--r12);padding:.9rem 1rem;margin-bottom:1rem}
+.mock-section-title{font-size:13px;font-weight:600;color:var(--ts);letter-spacing:.01em;margin-bottom:.6rem;text-transform:uppercase}
+.mock-btns{display:flex;gap:8px;flex-wrap:wrap}
+.mock-btn{flex:1;min-width:120px;padding:10px 12px;border-radius:var(--r8);border:1.5px solid var(--bd);background:var(--bg);color:var(--tp);cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;text-align:left;transition:all .15s;position:relative}
+.mock-btn:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-l)}
+.mock-btn.active{border-color:var(--acc);background:var(--acc-l);color:var(--acc)}
+.mock-btn-title{font-size:13px;font-weight:700;margin-bottom:2px}
+.mock-btn-sub{font-size:10px;color:var(--ts);font-weight:400}
+.mock-btn-score{font-size:10px;color:var(--acc);font-weight:600;margin-top:4px}
+/* Modal */
+.mock-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .2s}
+.mock-modal-overlay.open{opacity:1;pointer-events:all}
+.mock-modal{background:var(--bg);border:.5px solid var(--bd);border-radius:var(--r12);padding:1.5rem;max-width:480px;width:100%;box-shadow:var(--shadow-lg);transform:translateY(8px);transition:transform .2s}
+.mock-modal-overlay.open .mock-modal{transform:translateY(0)}
+.mock-modal-title{font-size:18px;font-weight:700;color:var(--tp);margin-bottom:.3rem}
+.mock-modal-sub{font-size:13px;color:var(--ts);margin-bottom:1rem}
+.mock-modal-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
+.mock-stat{background:var(--bgs);border:.5px solid var(--bd);border-radius:var(--r8);padding:10px 12px}
+.mock-stat-label{font-size:11px;color:var(--ts);margin-bottom:2px}
+.mock-stat-val{font-size:15px;font-weight:700;color:var(--tp)}
+.mock-modal-breakdown{margin-bottom:1.2rem}
+.mock-modal-breakdown-title{font-size:12px;font-weight:600;color:var(--ts);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.04em}
+.mock-bp-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:.5px solid var(--bd)}
+.mock-bp-row:last-child{border-bottom:none}
+.mock-bp-cat{color:var(--tp)}
+.mock-bp-count{color:var(--ts)}
+.mock-prev-scores{background:var(--acc-l);border:.5px solid var(--acc-m);border-radius:var(--r8);padding:10px 12px;margin-bottom:1.2rem}
+.mock-prev-title{font-size:11px;font-weight:600;color:var(--acc);margin-bottom:.4rem}
+.mock-prev-row{display:flex;justify-content:space-between;font-size:12px;color:var(--tp)}
+.mock-modal-actions{display:flex;gap:8px}
+.mock-start-btn{flex:1;padding:12px;background:var(--acc);color:#fff;border:none;border-radius:var(--r8);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.mock-start-btn:hover{background:var(--acc-d)}
+.mock-cancel-btn{padding:12px 20px;background:var(--bgs);color:var(--ts);border:.5px solid var(--bd);border-radius:var(--r8);font-family:inherit;font-size:14px;cursor:pointer;transition:all .15s}
+.mock-cancel-btn:hover{background:var(--bgd)}
+/* Timer */
+.exam-timer{font-family:'DM Mono',monospace;font-size:13px;color:var(--ts);padding:4px 10px;background:var(--bgs);border-radius:var(--r20);border:.5px solid var(--bd)}
+.exam-timer.warn{color:var(--warn);border-color:var(--warn-b);background:var(--warn-bg)}
+.exam-timer.crit{color:var(--bad);border-color:var(--bad-b);background:var(--bad-bg);animation:pulse 1s infinite}
+/* Results category breakdown */
+.mock-results-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:1rem 0}
+.mock-result-cat{background:var(--bgs);border:.5px solid var(--bd);border-radius:var(--r8);padding:8px 10px}
+.mock-result-cat-name{font-size:11px;color:var(--ts);margin-bottom:2px}
+.mock-result-cat-score{font-size:16px;font-weight:700}
+.mock-result-cat-score.ok{color:var(--ok)}
+.mock-result-cat-score.warn{color:var(--warn)}
+.mock-result-cat-score.bad{color:var(--bad)}
+
+.theme-toggle{position:fixed;top:12px;right:12px;z-index:1000;background:var(--bgs);border:.5px solid var(--bd);border-radius:var(--r20);padding:6px 10px;cursor:pointer;font-size:16px;line-height:1;box-shadow:var(--shadow);transition:all .15s;color:var(--tp)}
 .theme-toggle:hover{background:var(--bgd);box-shadow:var(--shadow-lg)}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bgd);color:var(--tp);min-height:100vh;line-height:1.55}
@@ -211,6 +260,9 @@ p{font-size:14px;color:var(--ts);line-height:1.6}
 .nav-summary-text{font-size:12px;color:var(--ts);white-space:nowrap;font-family:'DM Mono',monospace}
 .nav-summary-badge{font-size:11px;padding:2px 7px;border-radius:10px;white-space:nowrap}
 .nav-summary-toggle{font-size:11px;color:var(--tl);flex-shrink:0;transition:transform .2s}
+.nav-calc-btn{width:32px;height:32px;border-radius:var(--r8);background:var(--acc);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s}
+.nav-calc-btn:hover{background:var(--acc-d)}
+.nav-calc-btn svg{width:16px;height:16px}
 .nav-summary-toggle.open{transform:rotate(180deg)}
 .nav-dots-panel{display:none;padding:10px 12px;background:var(--bgs);border:.5px solid var(--bd);border-top:none;border-radius:0 0 var(--r8) var(--r8);margin-top:-1px;overflow:hidden}
 .nav-dots-panel.open{display:block}
@@ -433,13 +485,13 @@ p{font-size:14px;color:var(--ts);line-height:1.6}
 
 
 /* Calculator */
-#calc-fab{position:fixed;top:1rem;right:1rem;z-index:500;display:none}
+#calc-fab{position:fixed;top:1rem;right:1rem;z-index:500;display:none!important}
 .calc-fab-btn{width:44px;height:44px;border-radius:var(--r8);background:var(--acc);color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:var(--shadow-lg);display:flex;align-items:center;justify-content:center;transition:all .15s;font-family:inherit}
 .calc-fab-btn:hover{background:var(--acc-d)}
 .calc-fab-label{position:absolute;top:calc(100% + 6px);right:0;background:var(--tp);color:var(--bg);font-size:11px;padding:4px 8px;border-radius:6px;white-space:nowrap;opacity:0;transition:opacity .15s;pointer-events:none}
 #calc-fab:hover .calc-fab-label{opacity:1}
 .calc-panel{position:fixed;top:calc(1rem + 52px);right:1rem;z-index:501;width:min(270px,calc(100vw - 2rem));background:var(--bg);border:.5px solid var(--bd);border-radius:var(--r16);box-shadow:var(--shadow-lg);overflow:hidden;display:none}
-.calc-header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;background:var(--acc-l);border-bottom:.5px solid var(--acc-m)}
+.calc-header{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;background:var(--acc-l);border-bottom:.5px solid var(--acc-m);cursor:grab;user-select:none}
 .calc-header-title{font-size:14px;font-weight:500;color:var(--acc)}
 .calc-close{background:none;border:none;cursor:pointer;color:var(--ts);font-size:18px;line-height:1;padding:4px;min-width:32px;min-height:32px;display:flex;align-items:center;justify-content:center}
 .calc-display{padding:.75rem 1rem;background:var(--bgs);border-bottom:.5px solid var(--bd);min-height:64px}
@@ -571,6 +623,7 @@ p{font-size:14px;color:var(--ts);line-height:1.6}
           <button class="filt-btn muted" style="font-size:11px;padding:4px 12px" onclick="clearAllTopics()">Clear all</button>
         </div>
       </div>
+      <div id="mock-exams-container"></div>
       <div id="final-bp-container"></div>
       <div id="class-sections"></div>
     </div>
@@ -876,7 +929,6 @@ function resumeExam(){
   document.getElementById('start-screen').style.display='none';
   document.getElementById('exam-screen').style.display='block';
   document.getElementById('results-screen').style.display='none';
-  document.getElementById('calc-fab').style.display='block';
   if(examMode==='test'&&!examEnded&&timerLeft>0)startTimer();
   renderQ();
 }
@@ -994,6 +1046,7 @@ function quickSelectChapter(unit,ch){
 }
 // ═══════════════════════════════════════════════════════════════
 function buildClassSections(){
+  refreshMockSection();
   document.getElementById('final-bp-container').innerHTML=buildFinalBlueprintSection();
   document.getElementById('class-sections').innerHTML=buildClassSection('220 Critical Care');
   updateFilterSummary();
@@ -1225,7 +1278,6 @@ function startExam(){
   document.getElementById('start-screen').style.display='none';
   document.getElementById('exam-screen').style.display='block';
   document.getElementById('results-screen').style.display='none';
-  document.getElementById('calc-fab').style.display='block';
   if(examMode==='test')startTimer();renderQ();
 }
 
@@ -1322,7 +1374,24 @@ function renderQ(){
             <div class="nav-summary-prog"><div class="nav-summary-prog-fill" style="width:${pct}%;background:${progColor}"></div></div>
             <span class="nav-summary-text">${nAnswered} answered</span>${badges}
           </div>
-          <span class="nav-summary-toggle">▼</span>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span id="exam-timer-display" class="exam-timer" style="display:none"></span>
+            <button class="nav-calc-btn" onclick="event.stopPropagation();if(typeof toggleCalc==='function')toggleCalc()" title="Calculator">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2"/>
+                <line x1="8" y1="6" x2="16" y2="6"/>
+                <line x1="8" y1="10" x2="8" y2="10"/>
+                <line x1="12" y1="10" x2="12" y2="10"/>
+                <line x1="16" y1="10" x2="16" y2="10"/>
+                <line x1="8" y1="14" x2="8" y2="14"/>
+                <line x1="12" y1="14" x2="12" y2="14"/>
+                <line x1="16" y1="14" x2="16" y2="14"/>
+                <line x1="8" y1="18" x2="12" y2="18"/>
+                <line x1="16" y1="18" x2="16" y2="18"/>
+              </svg>
+            </button>
+            <span class="nav-summary-toggle">▼</span>
+          </div>
         </div>
         <div class="nav-dots-panel" id="nav-dots-panel">
           <div class="nav-dots">${dots}</div>${legend}
@@ -1734,14 +1803,25 @@ function goTo(i){
 
 function backToSetup(){
   stopTimer();
+  // Clean up mock exam timer if running
+  if(mockTimerInterval){clearInterval(mockTimerInterval);mockTimerInterval=null;}
+  if(activeMockExam&&!examEnded){activeMockExam=null;mockExamTimer=null;}
+  const timerEl=document.getElementById('exam-timer-display');
+  if(timerEl) timerEl.style.display='none';
   try{localStorage.removeItem(SK);}catch(e){}
   activeQs=[];curQ=0;answers={};selections={};guessed={};elim={};highlights={};optOrders={};examEnded=false;hlMode=false;
   hideAll();
   document.getElementById('start-screen').style.display='block';
-  buildStatusFilter();updateCount();
+  refreshMockSection();buildStatusFilter();updateCount();
 }
 
 function confirmEnd(){
+  if(activeMockExam!==null){
+    const unans=activeQs.filter(q=>!hasAnswer(q,answers[q.id])).length;
+    if(unans>0){showModal('Unanswered questions',`You have ${unans} unanswered question${unans!==1?'s':''} remaining. They will receive 0 points.`,'Submit exam',()=>{closeModal();endMockExam(false);});}
+    else{endMockExam(false);}
+    return;
+  }
   const unans=activeQs.filter(q=>!hasAnswer(q,answers[q.id])).length;
   if(unans>0){showModal('Unanswered questions',`You have ${unans} unanswered question${unans!==1?'s':''} remaining. They will receive 0 points.`,'Submit anyway',()=>{closeModal();finalizeTest(false);});}
   else{finalizeTest(false);}
@@ -1849,7 +1929,6 @@ function retryIncorrect(){
   try{localStorage.removeItem(SK);}catch(e){}
   hideAll();
   document.getElementById('exam-screen').style.display='block';
-  document.getElementById('calc-fab').style.display='block';
   renderQ();
 }
 
@@ -1896,6 +1975,279 @@ function showModal(title,body,confirmLabel,onConfirm){document.getElementById('m
 function closeModal(){document.getElementById('modal').style.display='none';}
 
 // ── BOOT ──
+
+// ═══════════════════════════════════════════════════════════════
+// MOCK EXAMS
+// ═══════════════════════════════════════════════════════════════
+const MOCK_EXAMS = {"1": [102, 103, 123, 228, 243, 376, 386, 398, 440, 470, 510, 527, 530, 551, 558, 586, 600, 602, 605, 638, 667, 672, 673, 707, 713, 731, 764, 773, 775, 776, 803, 804, 806, 835, 852, 869, 878, 901, 910, 915, 917, 918, 919, 921, 935, 944, 975, 981, 986, 990], "2": [101, 106, 110, 119, 211, 225, 348, 366, 448, 453, 456, 457, 461, 467, 482, 528, 537, 567, 572, 573, 579, 611, 641, 654, 664, 683, 687, 729, 742, 774, 779, 797, 808, 834, 848, 849, 851, 870, 904, 909, 912, 943, 946, 949, 954, 956, 959, 970, 985, 992], "3": [112, 230, 246, 331, 338, 345, 365, 373, 437, 447, 454, 489, 492, 496, 521, 536, 549, 550, 576, 616, 617, 626, 634, 639, 651, 668, 675, 690, 692, 699, 720, 733, 743, 750, 757, 765, 819, 839, 846, 854, 859, 868, 911, 922, 936, 937, 945, 955, 967, 991]};
+const MOCK_BLUEPRINT = {"Trauma": 7, "Neuro": 6, "Renal": 6, "DKA": 6, "Respiratory": 5, "Cardiac": 5, "Shock": 5, "Sepsis": 2, "Thyroid Storm": 2, "Organ Donation": 2, "Dosage Calculation": 2, "Pain & Sedation": 2};
+const SK_MOCK = 'nclex_mock_scores_v1';
+const MOCK_DURATION = 100 * 60; // 100 minutes in seconds
+
+let activeMockExam = null;   // 1, 2, or 3
+let mockExamTimer = null;    // seconds remaining
+let mockTimerInterval = null;
+let pendingMockExam = null;  // exam number waiting to start
+
+function loadMockScores(){
+  try{return JSON.parse(localStorage.getItem(SK_MOCK)||'{}');}catch(e){return{};}
+}
+function saveMockScore(examNum, score, total, breakdown){
+  const scores = loadMockScores();
+  if(!scores[examNum]) scores[examNum] = [];
+  scores[examNum].unshift({score, total, pct: Math.round(score/total*100), breakdown, date: new Date().toLocaleDateString()});
+  if(scores[examNum].length > 5) scores[examNum].pop(); // keep last 5
+  localStorage.setItem(SK_MOCK, JSON.stringify(scores));
+}
+
+function buildMockExamSection(){
+  const scores = loadMockScores();
+  let html = `<div class="mock-section">
+    <div class="mock-section-title">Mock Exams</div>
+    <div class="mock-btns">`;
+  [1,2,3].forEach(n => {
+    const examScores = scores[n] || [];
+    const best = examScores.length ? Math.max(...examScores.map(s=>s.pct)) : null;
+    const last = examScores.length ? examScores[0] : null;
+    const scoreHtml = last
+      ? `<div class="mock-btn-score">Best: ${best}% · Last: ${last.pct}% (${last.date})</div>`
+      : `<div class="mock-btn-score" style="color:var(--ts)">Not attempted</div>`;
+    html += `<button class="mock-btn${activeMockExam===n?' active':''}" onclick="openMockModal(${n})">
+      <div class="mock-btn-title">Mock Exam ${n}</div>
+      <div class="mock-btn-sub">50 questions · 100 min</div>
+      ${scoreHtml}
+    </button>`;
+  });
+  html += `</div></div>`;
+  return html;
+}
+
+function refreshMockSection(){
+  const el = document.getElementById('mock-exams-container');
+  if(el) el.innerHTML = buildMockExamSection();
+}
+
+function openMockModal(examNum){
+  pendingMockExam = examNum;
+  const scores = loadMockScores();
+  const examScores = scores[examNum] || [];
+
+  document.getElementById('mock-modal-title').textContent = `Mock Exam ${examNum}`;
+
+  // Previous scores
+  const prevEl = document.getElementById('mock-prev-scores-container');
+  if(examScores.length > 0){
+    const best = Math.max(...examScores.map(s=>s.pct));
+    let rows = examScores.slice(0,3).map((s,i) =>
+      `<div class="mock-prev-row"><span>${i===0?'Last attempt':i===1?'Previous':'Earlier'}</span><span style="font-weight:700;color:${s.pct>=70?'var(--ok)':s.pct>=50?'var(--warn)':'var(--bad)'}">${s.pct}% (${s.score}/${s.total})</span></div>`
+    ).join('');
+    prevEl.innerHTML = `<div class="mock-prev-scores">
+      <div class="mock-prev-title">📊 Previous Scores (Best: ${best}%)</div>
+      ${rows}
+    </div>`;
+  } else {
+    prevEl.innerHTML = '';
+  }
+
+  // Blueprint breakdown
+  const examIds = MOCK_EXAMS[String(examNum)];
+  const catCounts = {};
+  BANK.filter(q=>examIds.includes(q.id)).forEach(q=>{
+    catCounts[q.finalCategory] = (catCounts[q.finalCategory]||0)+1;
+  });
+  const breakdownEl = document.getElementById('mock-modal-breakdown-list');
+  breakdownEl.innerHTML = Object.entries(MOCK_BLUEPRINT).map(([cat,n])=>
+    `<div class="mock-bp-row"><span class="mock-bp-cat">${cat}</span><span class="mock-bp-count">${catCounts[cat]||n} questions</span></div>`
+  ).join('');
+
+  document.getElementById('mock-modal-overlay').classList.add('open');
+}
+
+function handleMockOverlayClick(e){
+  if(e.target.id==='mock-modal-overlay') closeMockModal();
+}
+function closeMockModal(){
+  document.getElementById('mock-modal-overlay').classList.remove('open');
+  pendingMockExam = null;
+}
+
+function startMockExam(){
+  const examNum = pendingMockExam; // read BEFORE closeMockModal nulls it
+  closeMockModal();
+  if(!examNum) return;
+
+  // Set active exam
+  activeMockExam = examNum;
+
+  // Build ordered question list
+  const examIds = MOCK_EXAMS[String(examNum)];
+  const examQs = BANK.filter(q=>examIds.includes(q.id));
+  const ordered = examIds.map(id=>examQs.find(q=>q.id===id)).filter(Boolean);
+
+  // Initialize all exam state — mirrors startExam() exactly
+  activeQs = ordered;
+  curQ = 0;
+  answers = {};
+  selections = {};
+  guessed = {};
+  elim = {};
+  highlights = {};
+  optOrders = {};
+  examEnded = false;
+  hlMode = false;
+  examMode = 'test';
+  // Set timer vars so renderQ timer bar renders correctly
+  timerTotal = MOCK_DURATION;
+  timerLeft = MOCK_DURATION;
+
+  // Start mock countdown timer (separate from exam timer bar)
+  mockExamTimer = MOCK_DURATION;
+  if(mockTimerInterval) clearInterval(mockTimerInterval);
+  mockTimerInterval = setInterval(()=>{
+    mockExamTimer--;
+    timerLeft = mockExamTimer; // keep in sync so timer bar reflects correctly
+    updateTimerDisplay();
+    updateTimerEl();
+    if(mockExamTimer <= 0){
+      clearInterval(mockTimerInterval);
+      mockTimerInterval = null;
+      endMockExam(true);
+    }
+  }, 1000);
+
+  // Show timer display in nav
+  const timerEl = document.getElementById('exam-timer-display');
+  if(timerEl) timerEl.style.display = 'inline-flex';
+  updateTimerDisplay();
+
+  // Clear saved session
+  try{localStorage.removeItem(SK);}catch(e){}
+
+  // Show exam screen — mirror startExam() exactly
+  document.getElementById('start-screen').style.display='none';
+  document.getElementById('exam-screen').style.display='block';
+  document.getElementById('results-screen').style.display='none';
+  saveSettings();
+  renderQ();
+}
+
+function updateTimerDisplay(){
+  const el = document.getElementById('exam-timer-display');
+  if(!el || mockExamTimer === null) return;
+  const mins = Math.floor(mockExamTimer/60);
+  const secs = mockExamTimer % 60;
+  el.textContent = `⏱ ${mins}:${secs.toString().padStart(2,'0')}`;
+  el.className = 'exam-timer' + (mockExamTimer < 300 ? ' warn' : '') + (mockExamTimer < 60 ? ' crit' : '');
+}
+
+function endMockExam(timeUp=false){
+  if(mockTimerInterval){ clearInterval(mockTimerInterval); mockTimerInterval=null; }
+  const timerEl = document.getElementById('exam-timer-display');
+  if(timerEl) timerEl.style.display='none';
+
+  examEnded = true;
+  examMode = 'test';
+
+  // Calculate score
+  let correct = 0, total = activeQs.length;
+  const breakdown = {};
+  Object.entries(MOCK_BLUEPRINT).forEach(([cat])=>{ breakdown[cat]={correct:0,total:0}; });
+
+  activeQs.forEach(q=>{
+    const cat = q.finalCategory || 'Other';
+    if(!breakdown[cat]) breakdown[cat]={correct:0,total:0};
+    breakdown[cat].total++;
+    if(answers[q.id]!==undefined){
+      const sc = scoreQ(q, answers[q.id]);
+      if(sc.detail==='full'){ correct++; breakdown[cat].correct++; }
+    }
+  });
+
+  // Save score
+  saveMockScore(activeMockExam, correct, total, breakdown);
+
+  // Update question statuses
+  activeQs.forEach(q=>{
+    if(answers[q.id]!==undefined){
+      const sc = scoreQ(q, answers[q.id]);
+      updateQStatus(q.id, sc.detail); // sc.detail is 'full'|'partial'|'zero'
+    } else {
+      updateQStatus(q.id, 'unanswered');
+    }
+  });
+
+  refreshMockSection();
+
+  // Show results screen with category breakdown
+  showMockResults(correct, total, breakdown, timeUp);
+}
+
+function showMockResults(correct, total, breakdown, timeUp){
+  const pct = Math.round(correct/total*100);
+  const scores = loadMockScores();
+  const examScores = scores[activeMockExam] || [];
+  const best = examScores.length ? Math.max(...examScores.map(s=>s.pct)) : pct;
+  const attempts = examScores.length;
+
+  const catHtml = Object.entries(breakdown).map(([cat,d])=>{
+    if(d.total===0) return '';
+    const p = d.total>0?Math.round(d.correct/d.total*100):0;
+    const cls = p>=70?'ok':p>=50?'warn':'bad';
+    return `<div class="mock-result-cat">
+      <div class="mock-result-cat-name">${cat}</div>
+      <div class="mock-result-cat-score ${cls}">${d.correct}/${d.total} <span style="font-size:11px;font-weight:400">(${p}%)</span></div>
+    </div>`;
+  }).join('');
+
+  const timeUpBanner = timeUp ? `<div style="background:var(--warn-bg);border:.5px solid var(--warn-b);border-radius:var(--r8);padding:8px 12px;margin-bottom:1rem;font-size:13px;color:var(--warn);font-weight:600">⏰ Time's up — unanswered questions marked incorrect</div>` : '';
+
+  // Use results-screen to show mock results (keeps exam-screen clean for review)
+  ['load-screen','start-screen','exam-screen'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.style.display='none';
+  });
+  const rs = document.getElementById('results-screen');
+  rs.style.display='block';
+  rs.innerHTML = `
+    <div style="max-width:600px;margin:2rem auto;padding:1rem">
+      ${timeUpBanner}
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <div style="font-size:13px;color:var(--ts);margin-bottom:.3rem">Mock Exam ${activeMockExam} · Attempt ${attempts}</div>
+        <div style="font-size:48px;font-weight:800;color:${pct>=70?'var(--ok)':pct>=50?'var(--warn)':'var(--bad)'};">${pct}%</div>
+        <div style="font-size:16px;color:var(--ts)">${correct} / ${total} correct</div>
+        ${attempts > 1 ? `<div style="font-size:12px;color:var(--acc);margin-top:.3rem">Personal best: ${best}%</div>` : ''}
+      </div>
+      <div class="mock-results-grid">${catHtml}</div>
+      <div style="display:flex;gap:8px;margin-top:1rem">
+        <button onclick="reviewMockExam()" style="flex:1;padding:12px;background:var(--acc);color:#fff;border:none;border-radius:var(--r8);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer">Review Questions</button>
+        <button onclick="exitMockExam()" style="flex:1;padding:12px;background:var(--bgs);color:var(--tp);border:.5px solid var(--bd);border-radius:var(--r8);font-family:inherit;font-size:14px;cursor:pointer">Back to Setup</button>
+      </div>
+    </div>`;
+}
+
+function reviewMockExam(){
+  examEnded = true;
+  examMode = 'test';
+  curQ = 0;
+  // Hide all other screens before showing exam-screen
+  ['load-screen','start-screen','results-screen'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.style.display='none';
+  });
+  document.getElementById('exam-screen').style.display='block';
+  renderQ();
+}
+
+function exitMockExam(){
+  if(mockTimerInterval){ clearInterval(mockTimerInterval); mockTimerInterval=null; }
+  mockExamTimer = null;
+  activeMockExam = null;
+  const timerEl = document.getElementById('exam-timer-display');
+  if(timerEl) timerEl.style.display='none';
+  activeQs=[]; answers={}; guessed={}; examEnded=false;
+  saveSettings();
+  refreshMockSection();
+  backToSetup();
+}
+
 // ── theme ──
 const SK_THEME='nclex_theme_v1';
 function applyTheme(t){
@@ -1921,12 +2273,107 @@ function cycleTheme(){
   localStorage.setItem(SK_THEME,next);applyTheme(next);
 }
 function initTheme(){applyTheme(localStorage.getItem(SK_THEME)||'system');}
+// ── CALC DRAG ────────────────────────────────────────────────────
+(function(){
+  let dragging=false, dx=0, dy=0;
+  function getPanel(){return document.getElementById('calc-panel');}
+
+  function startDrag(cx,cy){
+    const p=getPanel();if(!p)return;
+    const r=p.getBoundingClientRect();
+    // Anchor panel at current position using left/top instead of right
+    p.style.right='auto';
+    p.style.left=r.left+'px';
+    p.style.top=r.top+'px';
+    dx=cx-r.left;
+    dy=cy-r.top;
+    dragging=true;
+    document.body.style.userSelect='none';
+  }
+
+  function moveDrag(cx,cy){
+    if(!dragging)return;
+    const p=getPanel();if(!p)return;
+    const maxX=window.innerWidth-p.offsetWidth;
+    const maxY=window.innerHeight-p.offsetHeight;
+    p.style.left=Math.max(0,Math.min(cx-dx,maxX))+'px';
+    p.style.top=Math.max(0,Math.min(cy-dy,maxY))+'px';
+  }
+
+  function endDrag(){
+    dragging=false;
+    document.body.style.userSelect='';
+    const p=getPanel();if(p)p.style.cursor='';
+  }
+
+  // Mouse
+  document.addEventListener('mousedown',e=>{
+    const h=e.target.closest('.calc-header');
+    if(!h)return;
+    startDrag(e.clientX,e.clientY);
+    h.style.cursor='grabbing';
+  });
+  document.addEventListener('mousemove',e=>{if(dragging)moveDrag(e.clientX,e.clientY);});
+  document.addEventListener('mouseup',endDrag);
+
+  // Touch
+  document.addEventListener('touchstart',e=>{
+    const h=e.target.closest('.calc-header');
+    if(!h)return;
+    const t=e.touches[0];
+    startDrag(t.clientX,t.clientY);
+  },{passive:true});
+  document.addEventListener('touchmove',e=>{
+    if(!dragging)return;
+    e.preventDefault();
+    const t=e.touches[0];
+    moveDrag(t.clientX,t.clientY);
+  },{passive:false});
+  document.addEventListener('touchend',endDrag);
+
+  // Reset position when calc is reopened (so it goes back to default corner)
+  const origToggle=window.toggleCalc;
+  window.toggleCalc=function(){
+    origToggle&&origToggle();
+    const p=getPanel();if(!p)return;
+    // Only reset to default if it's being opened (display going to block)
+    if(p.style.display==='block'&&!p.dataset.dragged){
+      p.style.left='';
+      p.style.top='calc(1rem + 52px)';
+      p.style.right='1rem';
+    }
+  };
+})();
+
 loadBank();
 
 // ECG overlay keyboard + swipe dismiss
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeEcgZoom();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeEcgZoom();closeMockModal();};});
 (()=>{let sy=0;document.getElementById('ecg-overlay').addEventListener('touchstart',e=>{sy=e.touches[0].clientY;},{passive:true});document.getElementById('ecg-overlay').addEventListener('touchend',e=>{if(e.changedTouches[0].clientY-sy>60)closeEcgZoom();},{passive:true});})();
 
+
 </script>
+
+<!-- Mock Exam Modal -->
+<div class="mock-modal-overlay" id="mock-modal-overlay" onclick="handleMockOverlayClick(event)">
+  <div class="mock-modal" id="mock-modal">
+    <div class="mock-modal-title" id="mock-modal-title">Mock Exam 1</div>
+    <div class="mock-modal-sub">50 questions · 100 minutes · Blueprint-proportioned</div>
+    <div class="mock-modal-stats">
+      <div class="mock-stat"><div class="mock-stat-label">Questions</div><div class="mock-stat-val">50</div></div>
+      <div class="mock-stat"><div class="mock-stat-label">Time Limit</div><div class="mock-stat-val">100 min</div></div>
+    </div>
+    <div id="mock-prev-scores-container"></div>
+    <div class="mock-modal-breakdown">
+      <div class="mock-modal-breakdown-title">Blueprint Breakdown</div>
+      <div id="mock-modal-breakdown-list"></div>
+    </div>
+    <div class="mock-modal-actions">
+      <button class="mock-cancel-btn" onclick="closeMockModal()">Cancel</button>
+      <button class="mock-start-btn" id="mock-start-btn" onclick="startMockExam()">Start Exam</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
